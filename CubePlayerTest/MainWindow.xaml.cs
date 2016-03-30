@@ -32,7 +32,6 @@ namespace CubePlayerTest
         public static Viewport3D content = null;
         public void Test(object sender, MouseButtonEventArgs args)
         {
-
             Point Position = args.GetPosition(myViewport);
             PointHitTestParameters PointParams = new PointHitTestParameters(Position);
             VisualTreeHelper.HitTest(myViewport, null, HTResult, PointParams);
@@ -55,27 +54,27 @@ namespace CubePlayerTest
         
         public void SetResult(GeometryModel3D model)
         {
-            if (model.Geometry == (MeshGeometry3D)Application.Current.Resources["CubeSide01"])
+            if (model.Geometry == ((Cube)myViewport).CubeSide1)
             {
                 MessageBox.Show("Side 1");
             }
-            else if (model.Geometry == (MeshGeometry3D)Application.Current.Resources["CubeSide02"])
+            else if (model.Geometry == ((Cube)myViewport).CubeSide2)
             {
                 MessageBox.Show("Side 2");
             }
-            else if (model.Geometry == (MeshGeometry3D)Application.Current.Resources["CubeSide03"])
+            else if (model.Geometry == ((Cube)myViewport).CubeSide3)
             {
                 MessageBox.Show("Side 3");
             }
-            else if (model.Geometry == (MeshGeometry3D)Application.Current.Resources["CubeSide04"])
+            else if (model.Geometry == ((Cube)myViewport).CubeSide4)
             {
                 MessageBox.Show("Side 4");
             }
-            else if (model.Geometry == (MeshGeometry3D)Application.Current.Resources["CubeSide05"])
+            else if (model.Geometry == ((Cube)myViewport).CubeSide5)
             {
                 MessageBox.Show("Side 5");
             }
-            else if (model.Geometry == (MeshGeometry3D)Application.Current.Resources["CubeSide06"])
+            else if (model.Geometry == ((Cube)myViewport).CubeSide6)
             {
                 MessageBox.Show("Side 6");
             }

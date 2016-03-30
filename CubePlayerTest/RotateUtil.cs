@@ -33,8 +33,16 @@ namespace CubePlayerTest
         
         private void SetEventSource(FrameworkElement element)
         {
-            Event = element;
 
+            if (Event != null)
+            {
+                Event.MouseDown -= this.onMouseDown;
+                Event.MouseUp -= this.onMouseUp;
+                Event.MouseMove -= this.onMouseMove;
+            }
+
+            Event = element;
+            
             Event.MouseDown += this.onMouseDown;
             Event.MouseUp += this.onMouseUp;
             Event.MouseMove += this.onMouseMove;
@@ -60,7 +68,7 @@ namespace CubePlayerTest
         {
             Point currentPosition = e.GetPosition(Event);
 
-            if (e.RightButton == MouseButtonState.Pressed)
+            if (e.LeftButton == MouseButtonState.Pressed)
             {
                 Track(currentPosition);
             }

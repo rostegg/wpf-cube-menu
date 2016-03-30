@@ -14,12 +14,12 @@ namespace CubePlayerTest
        
         #region CubeSide
 
-        private MeshGeometry3D CubeSide1 = new MeshGeometry3D();
-        private MeshGeometry3D CubeSide2 = new MeshGeometry3D();
-        private MeshGeometry3D CubeSide3 = new MeshGeometry3D();
-        private MeshGeometry3D CubeSide4 = new MeshGeometry3D();
-        private MeshGeometry3D CubeSide5 = new MeshGeometry3D();
-        private MeshGeometry3D CubeSide6 = new MeshGeometry3D();
+        public MeshGeometry3D CubeSide1 = new MeshGeometry3D();
+        public MeshGeometry3D CubeSide2 = new MeshGeometry3D();
+        public MeshGeometry3D CubeSide3 = new MeshGeometry3D();
+        public MeshGeometry3D CubeSide4 = new MeshGeometry3D();
+        public MeshGeometry3D CubeSide5 = new MeshGeometry3D();
+        public MeshGeometry3D CubeSide6 = new MeshGeometry3D();
 
         private void SetupeCubeSides()
         {
