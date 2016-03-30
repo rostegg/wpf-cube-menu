@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CubePlayerTest
 {
-    class CubeClickingUtil
+    public class CubeClickingUtil
     {
     }
 }

@@ -8,7 +8,7 @@
         Title="MainWindow" Height="400" Width="600" Loaded="Window_Loaded">
     <Grid>
         <DockPanel Grid.Column="0" Grid.Row="0" Name="MainPlatform" Background="Black"  Focusable="True" MouseLeftButtonDown="Test" MouseMove="DockPanel_MouseMove" MouseRightButtonDown="DockPanel_MouseRightButtonDown" MouseRightButtonUp="DockPanel_MouseRightButtonUp" >
-            <Viewport3D  ClipToBounds="True" Width="351" Height="400" Name="myViewport" Focusable="True" Margin="0,0,0,-29.6" >
+          <!--  <Viewport3D  ClipToBounds="True" Width="351" Height="400" Name="myViewport" Focusable="True" Margin="0,0,0,-29.6" >
                 <Viewport3D.Camera>
                     <PerspectiveCamera x:Name="myPerspectiveCamera"
             FarPlaneDistance="15" LookDirection="0,0,1" UpDirection="0,1,0" NearPlaneDistance="1" Position="0,0,-3" FieldOfView="50" />
@@ -62,7 +62,7 @@
                             </ModelVisual3D.Content>
                         </ModelVisual3D>
                     </ModelVisual3D.Children>
-                    <!--   <ModelVisual3D.Transform>
+                       <ModelVisual3D.Transform>
                         <Transform3DGroup>
                             <Transform3DGroup.Children>
                                 <RotateTransform3D x:Name="myHorizontalRTransform">
@@ -78,9 +78,9 @@
                                 <TranslateTransform3D x:Name="myTranslateTransform" OffsetX="0" OffsetY="0" OffsetZ="0" />
                             </Transform3DGroup.Children >
                         </Transform3DGroup>
-                    </ModelVisual3D.Transform>-->
+                    </ModelVisual3D.Transform>
                 </ModelVisual3D>
-               <!-- <Viewport3D.Triggers>
+               <Viewport3D.Triggers>
                     <EventTrigger RoutedEvent="Viewport3D.Loaded">
                         <BeginStoryboard>
                             <Storyboard x:Name="rotationStoryboard">
@@ -97,8 +97,8 @@
                             </Storyboard>
                         </BeginStoryboard>
                     </EventTrigger>
-                </Viewport3D.Triggers>-->
-            </Viewport3D>
+                </Viewport3D.Triggers>
+            </Viewport3D>--> 
             <TextBox x:Name="textBox1" Height="24" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
             <TextBox x:Name="textBox2" Height="24" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         </DockPanel>

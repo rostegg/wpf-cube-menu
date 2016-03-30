@@ -21,6 +21,7 @@ namespace CubePlayerTest
     /// </summary>
     public partial class MainWindow : Window
     {
+        private static Viewport3D myViewport;
         private static double X = 0;
         private static double Y = 0;
         private static bool flag = false;
@@ -31,6 +32,7 @@ namespace CubePlayerTest
         public static Viewport3D content = null;
         public void Test(object sender, MouseButtonEventArgs args)
         {
+
             Point Position = args.GetPosition(myViewport);
             PointHitTestParameters PointParams = new PointHitTestParameters(Position);
             VisualTreeHelper.HitTest(myViewport, null, HTResult, PointParams);
@@ -49,129 +51,8 @@ namespace CubePlayerTest
             }
             return HitTestResultBehavior.Stop;
         }
-        public void TestCube()
-        {
-            // <Viewport3D  ClipToBounds="True" Width="351" Height="400" Name="myViewport" Focusable="True" Margin="0,0,0,-29.6" >
-            Viewport3D obj = new Viewport3D() {
-                ClipToBounds = true,
-                Width = 351,
-                Height = 400,
-                Focusable = true,
-                Margin = new Thickness(0, 0, 0, -29.6)
-            };
-            obj.Camera = new PerspectiveCamera() {
-                FarPlaneDistance = 15,
-                LookDirection = new Vector3D(0, 0, 1),
-                UpDirection = new Vector3D(0, 1, 0),
-                NearPlaneDistance = 1,
-                Position = new Point3D(0, 0, -3),
-                FieldOfView=50
-            };
-
-            EventTrigger Event = new EventTrigger()
-            {
-                RoutedEvent = Viewport3D.LoadedEvent
-            };
-           
-            ModelVisual3D CubeModel = new ModelVisual3D();
-
-            CubeModel.Children.Add(new ModelVisual3D()
-            {
-                Content = new DirectionalLight() { Color = Color.FromRgb(255,255,255), Direction = new Vector3D(-0.612372, -0.5, -0.612372) }
-            });
-            CubeModel.Children.Add(new ModelVisual3D()
-            {
-                Content = new DirectionalLight() { Color = Color.FromRgb(255, 255, 255), Direction = new Vector3D(0.612372, -0.5, -0.612372) }
-            });
-
-            CubeModel.Children.Add(new ModelVisual3D()
-            {
-                Content = new AmbientLight() { Color = Color.FromRgb(255, 255, 255) }
-            });
-
-
-            CubeModel.Children.Add(new ModelVisual3D()
-            {
-                Content = new GeometryModel3D() { Geometry = (Geometry3D)Application.Current.Resources["CubeSide01"] ,
-                    Material = (Material)Application.Current.Resources["Material1"] }
-            });
-
-            CubeModel.Children.Add(new ModelVisual3D()
-            {
-                Content = new GeometryModel3D()
-                {
-                    Geometry = (Geometry3D)Application.Current.Resources["CubeSide02"],
-                    Material = (Material)Application.Current.Resources["Material2"]
-                }
-            });
-
-            CubeModel.Children.Add(new ModelVisual3D()
-            {
-                Content = new GeometryModel3D()
-                {
-                    Geometry = (Geometry3D)Application.Current.Resources["CubeSide03"],
-                    Material = (Material)Application.Current.Resources["Material3"]
-                }
-            });
-
-            CubeModel.Children.Add(new ModelVisual3D()
-            {
-                Content = new GeometryModel3D()
-                {
-                    Geometry = (Geometry3D)Application.Current.Resources["CubeSide04"],
-                    Material = (Material)Application.Current.Resources["Material1"]
-                }
-            });
-
-            CubeModel.Children.Add(new ModelVisual3D()
-            {
-                Content = new GeometryModel3D()
-                {
-                    Geometry = (Geometry3D)Application.Current.Resources["CubeSide05"],
-                    Material = (Material)Application.Current.Resources["Material2"]
-                }
-            });
-
-            CubeModel.Children.Add(new ModelVisual3D()
-            {
-                Content = new GeometryModel3D()
-                {
-                    Geometry = (Geometry3D)Application.Current.Resources["CubeSide06"],
-                    Material = (Material)Application.Current.Resources["Material3"]
-                }
-            });
-
-
-            Transform3DGroup CubeAnim = new Transform3DGroup();
-
-            //horizontal
-            CubeAnim.Children.Add(new RotateTransform3D()
-            {
-                Rotation = new AxisAngleRotation3D() { Angle = 0, Axis = new Vector3D(0, 1, 0) }
-            });
-
-
-            //vetical
-            CubeAnim.Children.Add(new RotateTransform3D()
-            {
-                Rotation = new AxisAngleRotation3D() { Angle = 0, Axis = new Vector3D(1, 0, 0) }
-            } );
-
-            CubeAnim.Children.Add(new TranslateTransform3D()
-            {
-                OffsetX = 0,
-                OffsetY=0,
-                OffsetZ=0
-            });
-
-            CubeModel.Transform = CubeAnim;
-
-            obj.Children.Add(CubeModel);
-
-            content = obj;
-            //< TranslateTransform3D x: Name = "myTranslateTransform" OffsetX = "0" OffsetY = "0" OffsetZ = "0" />
-
-        }
+        
+        
         public void SetResult(GeometryModel3D model)
         {
             if (model.Geometry == (MeshGeometry3D)Application.Current.Resources["CubeSide01"])
@@ -250,7 +131,9 @@ namespace CubePlayerTest
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
+            myViewport = new Cube();
+            ((Cube)myViewport).Side01Img = @"D:\Megamozg.png";
+            MainPlatform.Children.Add(myViewport);
             RotateUtil util = new RotateUtil(MainPlatform);
             myViewport.Camera.Transform = util.TransformSource;
         }

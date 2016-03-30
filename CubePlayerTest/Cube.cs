@@ -1,20 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Media.Media3D;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System;
+using System.IO;
+using System.Windows;
 
 namespace CubePlayerTest
 {
     public class Cube : Viewport3D
     {
-
+       
         #region CubeSide
-        
 
-        
         private MeshGeometry3D CubeSide1 = new MeshGeometry3D();
         private MeshGeometry3D CubeSide2 = new MeshGeometry3D();
         private MeshGeometry3D CubeSide3 = new MeshGeometry3D();
@@ -55,7 +54,7 @@ namespace CubePlayerTest
                 new Point3D(-0.5,-0.5,0.5),
                 new Point3D(-0.5,-0.5,0.5),
                 new Point3D(-0.5,0.5,0.5),
-                new Point3D(-0.5,0.5,-0.5),
+                new Point3D(-0.5,0.5,-0.5)
             });
 
             #endregion
@@ -89,7 +88,7 @@ namespace CubePlayerTest
                 new Point3D(0.5,0.5,0.5),
                 new Point3D(0.5,0.5,0.5),
                 new Point3D(-0.5,0.5,0.5),
-                new Point3D(-0.5,-0.5,0.5),
+                new Point3D(-0.5,-0.5,0.5)
             });
 
             #endregion
@@ -123,7 +122,7 @@ namespace CubePlayerTest
                 new Point3D(0.5,0.5,0.5),
                 new Point3D(0.5,0.5,0.5),
                 new Point3D(0.5,-0.5,0.5),
-                new Point3D(0.5,-0.5,-0.5),
+                new Point3D(0.5,-0.5,-0.5)
             });
 
             #endregion
@@ -157,7 +156,7 @@ namespace CubePlayerTest
                 new Point3D(0.5,0.5,-0.5),
                 new Point3D(0.5,0.5,-0.5),
                 new Point3D(0.5,-0.5,-0.5),
-                new Point3D(-0.5,-0.5,-0.5),
+                new Point3D(-0.5,-0.5,-0.5)
             });
 
             #endregion
@@ -213,7 +212,7 @@ namespace CubePlayerTest
                 new Point3D(-0.5,0.5,0.5),
                 new Point3D(-0.5,0.5,0.5),
                 new Point3D(0.5,0.5,0.5),
-                new Point3D(0.5,0.5,-0.5),
+                new Point3D(0.5,0.5,-0.5)
             });
 
             #endregion
@@ -253,24 +252,415 @@ namespace CubePlayerTest
             });
 
             #endregion
-     //< MeshGeometry3D x: Key = "CubeSide06"
-     // TextureCoordinates = "1,0 1,1 0,1 0,1 0,0 1,0 "
-        }
 
+
+        }
 
 
         #endregion
 
         #region Material
+
+        private MaterialGroup Default = new MaterialGroup();
+        private MaterialGroup CubeSide01Material = new MaterialGroup();
+        private MaterialGroup CubeSide02Material = new MaterialGroup();
+        private MaterialGroup CubeSide03Material = new MaterialGroup();
+        private MaterialGroup CubeSide04Material = new MaterialGroup();
+        private MaterialGroup CubeSide05Material = new MaterialGroup();
+        private MaterialGroup CubeSide06Material = new MaterialGroup();
+
+        private void SetupMaterials()
+        {
+            #region Default
+            LinearGradientBrush brush = new LinearGradientBrush();
+            brush.GradientStops = new GradientStopCollection(new List<GradientStop>() {
+                new GradientStop() { Color = Color.FromRgb(255,0,0), Offset =0 },
+                new GradientStop() { Color = Color.FromRgb(255,255,0), Offset =0.5 },
+                new GradientStop() { Color = Color.FromRgb(0,0,255), Offset =0.7 }
+            }); 
+
+            DiffuseMaterial material = new DiffuseMaterial(brush);
+            Default.Children.Add(material);
+            #endregion
+
+            #region CubeMaterials
+
+            DiffuseMaterial material01 = new DiffuseMaterial(new ImageBrush() {
+                Stretch = Stretch.Fill,
+                TileMode = TileMode.None,
+                ViewportUnits = BrushMappingMode.Absolute,
+                Viewport = new System.Windows.Rect(0, 0, 1, 1),
+                AlignmentX = AlignmentX.Left,
+                AlignmentY = AlignmentY.Top,
+                Opacity = 1
+            });
+
+            CubeSide01Material.Children.Add(material01);
+            CubeSide02Material.Children.Add(material01);
+            CubeSide03Material.Children.Add(material01);
+            CubeSide04Material.Children.Add(material01);
+            CubeSide05Material.Children.Add(material01);
+            CubeSide06Material.Children.Add(material01);
+
+
+            //((ImageBrush)((DiffuseMaterial)CubeSide01Material.Children[0]).Brush).ImageSource = new BitmapImage(new Uri(_side01Img));
+
+            //((ImageBrush)((DiffuseMaterial)CubeSide02Material.Children[0]).Brush).ImageSource = new BitmapImage(new Uri(_side02Img));
+
+            //((ImageBrush)((DiffuseMaterial)CubeSide03Material.Children[0]).Brush).ImageSource = new BitmapImage(new Uri(_side03Img));
+
+            //((ImageBrush)((DiffuseMaterial)CubeSide04Material.Children[0]).Brush).ImageSource = new BitmapImage(new Uri(_side04Img));
+
+            //((ImageBrush)((DiffuseMaterial)CubeSide05Material.Children[0]).Brush).ImageSource = new BitmapImage(new Uri(_side05Img));
+
+            //((ImageBrush)((DiffuseMaterial)CubeSide06Material.Children[0]).Brush).ImageSource = new BitmapImage(new Uri(_side06Img));
+            #endregion
+
+        }
+
         #endregion
 
         #region Params
+
+        private string _side01Img = String.Empty;
+        private string _side02Img = String.Empty;
+        private string _side03Img = String.Empty;
+        private string _side04Img = String.Empty;
+        private string _side05Img = String.Empty;
+        private string _side06Img = String.Empty;
+
+
+        public string Side01Img
+        {
+            get { return _side01Img; }
+            set
+            {
+                if (File.Exists(value))
+                {
+                    ((ImageBrush)((DiffuseMaterial)CubeSide01Material.Children[0]).Brush).ImageSource = new BitmapImage(new Uri(value));
+
+                    ((GeometryModel3D)((ModelVisual3D)((ModelVisual3D)this.Children[0]).Children[3]).Content).Material = CubeSide01Material;
+                    _side01Img = value;
+                }
+                else
+                {
+                    throw new FileNotFoundException();
+                }
+            }
+        }
+
+        public string Side02Img
+        {
+            get { return _side02Img; }
+            set
+            {
+                if (File.Exists(value))
+                {
+                    ((ImageBrush)((DiffuseMaterial)CubeSide02Material.Children[0]).Brush).ImageSource = new BitmapImage(new Uri(value));
+
+                    ((GeometryModel3D)((ModelVisual3D)((ModelVisual3D)this.Children[0]).Children[4]).Content).Material = CubeSide02Material;
+                    _side02Img = value;
+                }
+                else
+                {
+                    throw new FileNotFoundException();
+                }
+            }
+        }
+
+        public string Side03Img
+        {
+            get { return _side03Img; }
+            set
+            {
+                if (File.Exists(value))
+                {
+                    ((ImageBrush)((DiffuseMaterial)CubeSide03Material.Children[0]).Brush).ImageSource = new BitmapImage(new Uri(value));
+
+                    ((GeometryModel3D)((ModelVisual3D)((ModelVisual3D)this.Children[0]).Children[5]).Content).Material = CubeSide03Material;
+
+                    _side03Img = value;
+                }
+                else
+                {
+                    throw new FileNotFoundException();
+                }
+            }
+        }
+
+        public string Side04Img
+        {
+            get { return _side04Img; }
+            set
+            {
+                if (File.Exists(value))
+                {
+                    ((ImageBrush)((DiffuseMaterial)CubeSide04Material.Children[0]).Brush).ImageSource = new BitmapImage(new Uri(value));
+
+                    ((GeometryModel3D)((ModelVisual3D)((ModelVisual3D)this.Children[0]).Children[6]).Content).Material = CubeSide04Material;
+
+                    _side04Img = value;
+                }
+                else
+                {
+                    throw new FileNotFoundException();
+                }
+            }
+        }
+
+        public string Side05Img
+        {
+            get { return _side05Img; }
+            set {
+                 if (File.Exists(value))
+                {
+                    ((ImageBrush)((DiffuseMaterial)CubeSide05Material.Children[0]).Brush).ImageSource = new BitmapImage(new Uri(value));
+
+                    ((GeometryModel3D)((ModelVisual3D)((ModelVisual3D)this.Children[0]).Children[7]).Content).Material = CubeSide05Material;
+
+                    _side05Img = value;
+                }
+                else
+                {
+                    throw new FileNotFoundException();
+                }
+            }
+        }
+
+        public string Side06Img
+        {
+            get { return _side06Img; }
+            set
+            {
+                if (File.Exists(value))
+                {
+                    ((ImageBrush)((DiffuseMaterial)CubeSide06Material.Children[0]).Brush).ImageSource = new BitmapImage(new Uri(value));
+
+                    ((GeometryModel3D)((ModelVisual3D)((ModelVisual3D)this.Children[0]).Children[8]).Content).Material = CubeSide06Material;
+
+                    _side06Img = value;
+                }
+                else
+                {
+                    throw new FileNotFoundException();
+                }
+            }
+        }
+
+
         #endregion
-        public Cube(float position)
+
+
+        public Cube()
         {
             SetupeCubeSides();
+            SetupMaterials();
+            CreateCube();
         }
-        
 
+        public Cube(double position)
+        {
+            SetupeCubeSides();
+            SetupMaterials();
+            if (position > 0 && position < 1)
+            {
+                ChangePositionFromDefault(position);
+            }
+            CreateCube();
+        }
+
+        public void ChangePositionFromDefault(double position)
+        {
+            CubeSide1.Positions = new Point3DCollection(new List<Point3D>() {
+                new Point3D(-position,position,-position),
+                new Point3D(-position,-position,-position),
+                new Point3D(-position,-position,position),
+                new Point3D(-position,-position,position),
+                new Point3D(-position,position,position),
+                new Point3D(-position,position,-position)
+            });
+
+            CubeSide2.Positions = new Point3DCollection(new List<Point3D>() {
+                new Point3D(-position,-position,position),
+                new Point3D(position,-position,position),
+                new Point3D(position,position,position),
+                new Point3D(position,position,position),
+                new Point3D(-position,position,position),
+                new Point3D(-position,-position,position)
+            });
+
+            CubeSide3.Positions = new Point3DCollection(new List<Point3D>() {
+                new Point3D(position,-position,-position),
+                new Point3D(position,position,-position),
+                new Point3D(position,position,position),
+                new Point3D(position,position,position),
+                new Point3D(position,-position,position),
+                new Point3D(position,-position,-position)
+            });
+
+            CubeSide4.Positions = new Point3DCollection(new List<Point3D>() {
+                new Point3D(-position,-position,-position),
+                new Point3D(-position,position,-position),
+                new Point3D(position,position,-position),
+                new Point3D(position,position,-position),
+                new Point3D(position,-position,-position),
+                new Point3D(-position,-position,-position)
+            });
+
+            CubeSide5.Positions = new Point3DCollection(new List<Point3D>() {
+                new Point3D(-position,-position,-position),
+                new Point3D( -position,position,position),
+                new Point3D( -position,-position,position),
+                new Point3D(position,-position,position),
+                new Point3D(-position,-position,-position),
+                new Point3D(-position,position,-position),
+
+                new Point3D(position,position,-position),
+                new Point3D(-position,position,-position),
+                new Point3D(-position,position,position),
+                new Point3D(-position,position,position),
+                new Point3D(position,position,position),
+                new Point3D(position,position,-position)
+            });
+
+            CubeSide6.Positions = new Point3DCollection(new List<Point3D>() {
+                new Point3D(-position,-position,position),
+                new Point3D(-position,-position,-position),
+                new Point3D(position,-position,-position),
+                new Point3D(position,-position,-position),
+                new Point3D(position,-position,position),
+                new Point3D(-position,-position,position)
+
+            });
+
+        }
+
+        private void CreateCube()
+        {
+            this.ClipToBounds = true;
+            this.Width = 351;
+            this.Height = 400;
+            this.Focusable = true;
+            this.Margin = new Thickness(0, 0, 0, -29.6);
+
+            this.Camera = new PerspectiveCamera()
+            {
+                FarPlaneDistance = 15,
+                LookDirection = new Vector3D(0, 0, 1),
+                UpDirection = new Vector3D(0, 1, 0),
+                NearPlaneDistance = 1,
+                Position = new Point3D(0, 0, -3),
+                FieldOfView = 50
+            };
+
+            EventTrigger Event = new EventTrigger()
+            {
+                RoutedEvent = Viewport3D.LoadedEvent
+            };
+
+            ModelVisual3D CubeModel = new ModelVisual3D();
+
+            CubeModel.Children.Add(new ModelVisual3D()
+            {
+                Content = new DirectionalLight() { Color = Color.FromRgb(255, 255, 255), Direction = new Vector3D(-0.612372, -0.5, -0.612372) }
+            });
+
+            CubeModel.Children.Add(new ModelVisual3D()
+            {
+                Content = new DirectionalLight() { Color = Color.FromRgb(255, 255, 255), Direction = new Vector3D(0.612372, -0.5, -0.612372) }
+            });
+
+            CubeModel.Children.Add(new ModelVisual3D()
+            {
+                Content = new AmbientLight() { Color = Color.FromRgb(255, 255, 255) }
+            });
+
+
+
+
+            CubeModel.Children.Add(new ModelVisual3D()
+            {
+                Content = new GeometryModel3D()
+                {
+                    Geometry = CubeSide1,
+                    Material = Default
+                }
+            });
+
+            CubeModel.Children.Add(new ModelVisual3D()
+            {
+                Content = new GeometryModel3D()
+                {
+                    Geometry = CubeSide2,
+                    Material = Default
+                }
+            });
+
+            CubeModel.Children.Add(new ModelVisual3D()
+            {
+                Content = new GeometryModel3D()
+                {
+                    Geometry = CubeSide3,
+                    Material = Default
+                }
+            });
+
+            CubeModel.Children.Add(new ModelVisual3D()
+            {
+                Content = new GeometryModel3D()
+                {
+                    Geometry = CubeSide4,
+                    Material = Default
+                }
+            });
+
+            CubeModel.Children.Add(new ModelVisual3D()
+            {
+                Content = new GeometryModel3D()
+                {
+                    Geometry = CubeSide5,
+                    Material = Default
+                }
+            });
+
+            CubeModel.Children.Add(new ModelVisual3D()
+            {
+                Content = new GeometryModel3D()
+                {
+                    Geometry = CubeSide6,
+                    Material = Default
+                }
+            });
+
+
+            Transform3DGroup CubeAnim = new Transform3DGroup();
+
+            //horizontal
+            CubeAnim.Children.Add(new RotateTransform3D()
+            {
+                Rotation = new AxisAngleRotation3D() { Angle = 0, Axis = new Vector3D(0, 1, 0) }
+            });
+
+
+            //vetical
+            CubeAnim.Children.Add(new RotateTransform3D()
+            {
+                Rotation = new AxisAngleRotation3D() { Angle = 0, Axis = new Vector3D(1, 0, 0) }
+            });
+
+            CubeAnim.Children.Add(new TranslateTransform3D()
+            {
+                OffsetX = 0,
+                OffsetY = 0,
+                OffsetZ = 0
+            });
+
+            CubeModel.Transform = CubeAnim;
+
+
+            this.Children.Add(CubeModel);
+        }
+
+       
     }
 }
