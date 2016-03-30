@@ -321,6 +321,8 @@ namespace CubePlayerTest
         #endregion
 
         #region Params
+        private DockPanel Platform = null;
+        public ClickingUtil ClickEvent = null;
 
         private string _side01Img = String.Empty;
         private string _side02Img = String.Empty;
@@ -328,6 +330,13 @@ namespace CubePlayerTest
         private string _side04Img = String.Empty;
         private string _side05Img = String.Empty;
         private string _side06Img = String.Empty;
+
+        private Action _side01Func = null;
+        private Action _side02Func = null;
+        private Action _side03Func = null;
+        private Action _side04Func = null;
+        private Action _side05Func = null;
+        private Action _side06Func = null;
 
 
         public string Side01Img
@@ -447,19 +456,58 @@ namespace CubePlayerTest
             }
         }
 
+        public Action Side01Function
+        {
+            get { return _side01Func; }
+            set { _side01Func = value; }
+        }
 
+        public Action Side02Function
+        {
+            get { return _side02Func; }
+            set { _side02Func = value; }
+        }
+
+        public Action Side03Function
+        {
+            get { return _side03Func; }
+            set { _side03Func = value; }
+        }
+
+        public Action Side04Function
+        {
+            get { return _side04Func; }
+            set { _side04Func = value; }
+        }
+
+        public Action Side05Function
+        {
+            get { return _side05Func; }
+            set { _side05Func = value; }
+        }
+
+        public Action Side06Function
+        {
+            get { return _side06Func; }
+            set { _side06Func = value; }
+        }
         #endregion
 
 
-        public Cube()
+        public Cube(DockPanel platform)
         {
+            Platform = platform;
             SetupeCubeSides();
             SetupMaterials();
             CreateCube();
+            ClickEvent = new ClickingUtil(this as Viewport3D, Figures.Cube);
+            platform.MouseLeftButtonDown += ClickEvent.ClickFaceEvent;
+            CreateRotateUtil();
         }
 
-        public Cube(double position)
+        public Cube(double position, DockPanel platform)
         {
+            Platform = platform;
             SetupeCubeSides();
             SetupMaterials();
             if (position > 0 && position < 1)
@@ -467,6 +515,8 @@ namespace CubePlayerTest
                 ChangePositionFromDefault(position);
             }
             CreateCube();
+            ClickEvent = new ClickingUtil(this as Viewport3D, Figures.Cube);
+            CreateRotateUtil();
         }
 
         public void ChangePositionFromDefault(double position)
@@ -662,5 +712,10 @@ namespace CubePlayerTest
         }
 
        
+        private void CreateRotateUtil()
+        {
+            RotateUtil util = new RotateUtil(Platform);
+            this.Camera.Transform = util.TransformSource;
+        }
     }
 }

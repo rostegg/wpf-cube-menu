@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="400" Width="600" Loaded="Window_Loaded">
     <Grid>
-        <DockPanel Grid.Column="0" Grid.Row="0" Name="MainPlatform" Background="Black"  Focusable="True" MouseLeftButtonDown="Test" MouseMove="DockPanel_MouseMove" MouseRightButtonDown="DockPanel_MouseRightButtonDown" MouseRightButtonUp="DockPanel_MouseRightButtonUp" >
+        <DockPanel Grid.Column="0" Grid.Row="0" Name="MainPlatform" Background="Black"  Focusable="True" >
           <!--  <Viewport3D  ClipToBounds="True" Width="351" Height="400" Name="myViewport" Focusable="True" Margin="0,0,0,-29.6" >
                 <Viewport3D.Camera>
                     <PerspectiveCamera x:Name="myPerspectiveCamera"

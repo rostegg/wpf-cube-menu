@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace CubePlayerTest
 {
-    public class CubeClickingUtil
+    public enum Figures
     {
+        Cube = 1,
+        Triangle = 2
     }
 }

@@ -57,7 +57,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Cube.cs" />
-    <Compile Include="CubeClickingUtil.cs" />
+    <Compile Include="ClickingUtil.cs" />
+    <Compile Include="Figures.cs" />
     <Compile Include="RotateUtil.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

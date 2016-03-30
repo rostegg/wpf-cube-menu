@@ -12,7 +12,7 @@ namespace CubePlayerTest
     public class RotateUtil
     {
         #region Params
-        private FrameworkElement Event;
+        private FrameworkElement EventPlatform;
         private Point Position2D;
         private Vector3D Position3D = new Vector3D(0, 0, 1);
 
@@ -34,39 +34,39 @@ namespace CubePlayerTest
         private void SetEventSource(FrameworkElement element)
         {
 
-            if (Event != null)
+            if (EventPlatform != null)
             {
-                Event.MouseDown -= this.onMouseDown;
-                Event.MouseUp -= this.onMouseUp;
-                Event.MouseMove -= this.onMouseMove;
+                EventPlatform.MouseDown -= this.onMouseDown;
+                EventPlatform.MouseUp -= this.onMouseUp;
+                EventPlatform.MouseMove -= this.onMouseMove;
             }
 
-            Event = element;
+            EventPlatform = element;
             
-            Event.MouseDown += this.onMouseDown;
-            Event.MouseUp += this.onMouseUp;
-            Event.MouseMove += this.onMouseMove;
+            EventPlatform.MouseDown += this.onMouseDown;
+            EventPlatform.MouseUp += this.onMouseUp;
+            EventPlatform.MouseMove += this.onMouseMove;
         }
 
 
         private void onMouseDown(object sender, MouseEventArgs e)
         {
-            Mouse.Capture(Event, CaptureMode.Element);
-            Position2D = e.GetPosition(Event);
+            Mouse.Capture(EventPlatform, CaptureMode.Element);
+            Position2D = e.GetPosition(EventPlatform);
             Position3D = GetVector3D(
-                Event.ActualWidth,
-                Event.ActualHeight,
+                EventPlatform.ActualWidth,
+                EventPlatform.ActualHeight,
                 Position2D);
         }
 
         private void onMouseUp(object sender, MouseEventArgs e)
         {
-            Mouse.Capture(Event, CaptureMode.None);
+            Mouse.Capture(EventPlatform, CaptureMode.None);
         }
 
         private void onMouseMove(object sender, MouseEventArgs e)
         {
-            Point currentPosition = e.GetPosition(Event);
+            Point currentPosition = e.GetPosition(EventPlatform);
 
             if (e.LeftButton == MouseButtonState.Pressed)
             {
@@ -83,7 +83,7 @@ namespace CubePlayerTest
             try
             {
                 Vector3D currentPosition3D = GetVector3D(
-                Event.ActualWidth, Event.ActualHeight, currentPosition);
+                EventPlatform.ActualWidth, EventPlatform.ActualHeight, currentPosition);
 
                 Vector3D axis = Vector3D.CrossProduct(Position3D, currentPosition3D);
                 double angle = Vector3D.AngleBetween(Position3D, currentPosition3D);
