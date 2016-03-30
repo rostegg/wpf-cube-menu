@@ -45,7 +45,7 @@ namespace CubePlayerTest
         {
             Mouse.Capture(Event, CaptureMode.Element);
             Position2D = e.GetPosition(Event);
-            Position3D = ProjectToTrackball(
+            Position3D = GetVector3D(
                 Event.ActualWidth,
                 Event.ActualHeight,
                 Position2D);
@@ -64,6 +64,8 @@ namespace CubePlayerTest
             {
                 Track(currentPosition);
             }
+            if (e.MiddleButton == MouseButtonState.Pressed)
+                Zoom(currentPosition);
 
             Position2D = currentPosition;
         }
@@ -72,7 +74,7 @@ namespace CubePlayerTest
         {
             try
             {
-                Vector3D currentPosition3D = ProjectToTrackball(
+                Vector3D currentPosition3D = GetVector3D(
                 Event.ActualWidth, Event.ActualHeight, currentPosition);
 
                 Vector3D axis = Vector3D.CrossProduct(Position3D, currentPosition3D);
@@ -96,7 +98,7 @@ namespace CubePlayerTest
             
         }
 
-        private Vector3D ProjectToTrackball(double width, double height, Point point)
+        private Vector3D GetVector3D(double width, double height, Point point)
         {
             double x = point.X / (width / 2);  
             double y = point.Y / (height / 2);

@@ -253,11 +253,6 @@ namespace CubePlayerTest
 
             RotateUtil util = new RotateUtil(MainPlatform);
             myViewport.Camera.Transform = util.TransformSource;
-            //Trackball trackball = new Trackball();
-            //trackball.EventSource = MainPlatform;
-            //myViewport.Camera.Transform = trackball.Transform;
-            //TestCube();
-            //MainPlatform.Children.Add(content);
         }
     }
 }
