@@ -6,7 +6,6 @@ D:\Work\Programming\CubePlayerTest\CubePlayerTest\obj\Debug\MainWindow.g.cs
 D:\Work\Programming\CubePlayerTest\CubePlayerTest\obj\Debug\App.g.cs
 D:\Work\Programming\CubePlayerTest\CubePlayerTest\obj\Debug\CubePlayerTest_MarkupCompile.cache
 D:\Work\Programming\CubePlayerTest\CubePlayerTest\obj\Debug\CubePlayerTest_MarkupCompile.lref
-D:\Work\Programming\CubePlayerTest\CubePlayerTest\obj\Debug\App.baml
 D:\Work\Programming\CubePlayerTest\CubePlayerTest\obj\Debug\MainWindow.baml
 D:\Work\Programming\CubePlayerTest\CubePlayerTest\obj\Debug\CubePlayerTest.g.resources
 D:\Work\Programming\CubePlayerTest\CubePlayerTest\obj\Debug\CubePlayerTest.Properties.Resources.resources

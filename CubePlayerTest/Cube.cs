@@ -261,7 +261,7 @@ namespace CubePlayerTest
 
         #region Material
 
-        private MaterialGroup Default = new MaterialGroup();
+        public MaterialGroup DefaultMaterial = new MaterialGroup();
         private MaterialGroup CubeSide01Material = new MaterialGroup();
         private MaterialGroup CubeSide02Material = new MaterialGroup();
         private MaterialGroup CubeSide03Material = new MaterialGroup();
@@ -280,7 +280,7 @@ namespace CubePlayerTest
             }); 
 
             DiffuseMaterial material = new DiffuseMaterial(brush);
-            Default.Children.Add(material);
+            DefaultMaterial.Children.Add(material);
             #endregion
 
             #region CubeMaterials
@@ -301,19 +301,7 @@ namespace CubePlayerTest
             CubeSide04Material.Children.Add(material01);
             CubeSide05Material.Children.Add(material01);
             CubeSide06Material.Children.Add(material01);
-
-
-            //((ImageBrush)((DiffuseMaterial)CubeSide01Material.Children[0]).Brush).ImageSource = new BitmapImage(new Uri(_side01Img));
-
-            //((ImageBrush)((DiffuseMaterial)CubeSide02Material.Children[0]).Brush).ImageSource = new BitmapImage(new Uri(_side02Img));
-
-            //((ImageBrush)((DiffuseMaterial)CubeSide03Material.Children[0]).Brush).ImageSource = new BitmapImage(new Uri(_side03Img));
-
-            //((ImageBrush)((DiffuseMaterial)CubeSide04Material.Children[0]).Brush).ImageSource = new BitmapImage(new Uri(_side04Img));
-
-            //((ImageBrush)((DiffuseMaterial)CubeSide05Material.Children[0]).Brush).ImageSource = new BitmapImage(new Uri(_side05Img));
-
-            //((ImageBrush)((DiffuseMaterial)CubeSide06Material.Children[0]).Brush).ImageSource = new BitmapImage(new Uri(_side06Img));
+            
             #endregion
 
         }
@@ -516,6 +504,7 @@ namespace CubePlayerTest
             }
             CreateCube();
             ClickEvent = new ClickingUtil(this as Viewport3D, Figures.Cube);
+            platform.MouseLeftButtonDown += ClickEvent.ClickFaceEvent;
             CreateRotateUtil();
         }
 
@@ -633,7 +622,7 @@ namespace CubePlayerTest
                 Content = new GeometryModel3D()
                 {
                     Geometry = CubeSide1,
-                    Material = Default
+                    Material = DefaultMaterial
                 }
             });
 
@@ -642,7 +631,7 @@ namespace CubePlayerTest
                 Content = new GeometryModel3D()
                 {
                     Geometry = CubeSide2,
-                    Material = Default
+                    Material = DefaultMaterial
                 }
             });
 
@@ -651,7 +640,7 @@ namespace CubePlayerTest
                 Content = new GeometryModel3D()
                 {
                     Geometry = CubeSide3,
-                    Material = Default
+                    Material = DefaultMaterial
                 }
             });
 
@@ -660,7 +649,7 @@ namespace CubePlayerTest
                 Content = new GeometryModel3D()
                 {
                     Geometry = CubeSide4,
-                    Material = Default
+                    Material = DefaultMaterial
                 }
             });
 
@@ -669,7 +658,7 @@ namespace CubePlayerTest
                 Content = new GeometryModel3D()
                 {
                     Geometry = CubeSide5,
-                    Material = Default
+                    Material = DefaultMaterial
                 }
             });
 
@@ -678,7 +667,7 @@ namespace CubePlayerTest
                 Content = new GeometryModel3D()
                 {
                     Geometry = CubeSide6,
-                    Material = Default
+                    Material = DefaultMaterial
                 }
             });
 
@@ -710,7 +699,6 @@ namespace CubePlayerTest
 
             this.Children.Add(CubeModel);
         }
-
        
         private void CreateRotateUtil()
         {

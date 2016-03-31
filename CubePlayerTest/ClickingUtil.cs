@@ -65,42 +65,42 @@ namespace CubePlayerTest
                 if (CurrentFigure.Side01Function != null)
                     CurrentFigure.Side01Function();
                 else
-                    MessageBox.Show("Side 1");
+                    throw new NotImplementedException("The function has no implementation");
             }
             else if (model.Geometry == ((Cube)Figure).CubeSide2)
             {
                 if (CurrentFigure.Side02Function != null)
                     CurrentFigure.Side02Function();
                 else
-                    MessageBox.Show("Side 2");
+                    throw new NotImplementedException("The function has no implementation");
             }
             else if (model.Geometry == ((Cube)Figure).CubeSide3)
             {
                 if (CurrentFigure.Side03Function != null)
                     CurrentFigure.Side03Function();
                 else
-                    MessageBox.Show("Side 3");
+                    throw new NotImplementedException("The function has no implementation");
             }
             else if (model.Geometry == ((Cube)Figure).CubeSide4)
             {
                 if (CurrentFigure.Side04Function != null)
                     CurrentFigure.Side04Function();
                 else
-                    MessageBox.Show("Side 4");
+                    throw new NotImplementedException("The function has no implementation");
             }
             else if (model.Geometry == ((Cube)Figure).CubeSide5)
             {
                 if (CurrentFigure.Side05Function != null)
                     CurrentFigure.Side05Function();
                 else
-                    MessageBox.Show("Side 5");
+                    throw new NotImplementedException("The function has no implementation");
             }
             else if (model.Geometry == ((Cube)Figure).CubeSide6)
             {
                 if (CurrentFigure.Side06Function != null)
                     CurrentFigure.Side06Function();
                 else
-                    MessageBox.Show("Side 6");
+                    throw new NotImplementedException("The function has no implementation");
             }
         }
         private void SetResultTriangle(GeometryModel3D model)

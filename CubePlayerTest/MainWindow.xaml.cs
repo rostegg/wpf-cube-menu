@@ -21,10 +21,7 @@ namespace CubePlayerTest
     /// </summary>
     public partial class MainWindow : Window
     {
-        private static Cube myViewport;
-        private static double X = 0;
-        private static double Y = 0;
-        private static bool flag = false;
+        private static Cube myFigure;
         public MainWindow()
         {
             InitializeComponent();
@@ -34,13 +31,10 @@ namespace CubePlayerTest
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            myViewport = new Cube(MainPlatform);
-            myViewport.Side01Img = @"D:\Megamozg.png";
-            MainPlatform.Children.Add(myViewport);
-           // RotateUtil util = new RotateUtil(MainPlatform);
-           // myViewport.Camera.Transform = util.TransformSource;
-           // ClickingUtil click = new ClickingUtil(myViewport, Figures.Cube);
-           //this.MainPlatform.MouseLeftButtonDown += ((Cube)myViewport).ClickEvent.ClickFaceEvent;
+            myFigure = new Cube(MainPlatform);
+            myFigure.Side01Function = () => { MessageBox.Show("Test"); };
+            //myFigure.Side01Img = "Path";
+            MainPlatform.Children.Add(myFigure);
         }
     }
 }
